@@ -9,6 +9,6 @@ class SquareTest {
     {
         Square s = new Square("prison");
 
-        assertTrue(s.equals("prison"));
+        assertTrue(s.getName().equals("prison"));
     }
 }
