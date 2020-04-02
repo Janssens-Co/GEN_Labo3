@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class SquareTest {
 
     @Test
-    void testSquare()
+    void testNameEquals()
     {
         Square s = new Square("prison");
 
