@@ -1,5 +1,5 @@
 public class Square {
-    String name;
+    private String name;
 
     Square(String name){
         this.name = name;
