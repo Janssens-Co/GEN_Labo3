@@ -24,10 +24,10 @@ public class Player {
     private String name;
 
 
-    public Player(String name, Piece piece) {
+    public Player(String name) {
 
         this.name = name;
-        this.piece = piece;
+        this.piece = new Piece(name + "'s piece");
 
         if(name == null || name =="")
             throw new InvalidParameterException("A player must have a name");
@@ -64,10 +64,13 @@ public class Player {
         }
 
         newLoc = board.getSquare(oldLoc,fvTot);
-
         piece.setLocation(newLoc);
+
+        System.out.println(toString() + " landed on " + piece.getLocation());
     }
 
-
+    public String toString(){
+        return "Player " + name;
+    }
 
 }

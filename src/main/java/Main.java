@@ -9,26 +9,8 @@
  * AUTHORS : Mattei Simon, Janssens Emmanuel, Potet Bastien
  */
 
-import java.security.InvalidParameterException;
-
-public class Square {
-
-    private String name;
-
-    public String getName() {
-        return name;
-    }
-
-    public Square(String name) {
-
-        if(name == null || name.equals(""))
-        {
-            throw new InvalidParameterException("Square name should not be null");
-        }
-        this.name = name;
-    }
-
-    public String toString(){
-        return name;
+public class Main {
+    public static void main(String... args){
+        new MonopolyGame().playGame();
     }
 }
