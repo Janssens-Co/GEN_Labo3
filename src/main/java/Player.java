@@ -1,3 +1,14 @@
+/**
+ *  _____ _____ _   _       _      ___ ______ _____ _____
+ * |  __ |  ___| \ | |  _  | |    / _ \| ___ |  _  |____ |
+ * | |  \| |__ |  \| | (_) | |   / /_\ | |_/ | | | |   / /
+ * | | __|  __|| . ` |     | |   |  _  | ___ | | | |   \ \
+ * | |_\ | |___| |\  |  _  | |___| | | | |_/ \ \_/ .___/ /
+ *  \____\____/\_| \_/ (_) \_____\_| |_\____/ \___/\____/
+ *
+ * AUTHORS : Mattei Simon, Janssens Emmanuel, Potet Bastien
+ */
+
 import java.security.InvalidParameterException;
 
 public class Player {
@@ -13,10 +24,10 @@ public class Player {
     private String name;
 
 
-    public Player(String name, Piece piece) {
+    public Player(String name) {
 
         this.name = name;
-        this.piece = piece;
+        this.piece = new Piece(name + "'s piece");
 
         if(name == null || name =="")
             throw new InvalidParameterException("A player must have a name");
@@ -53,10 +64,13 @@ public class Player {
         }
 
         newLoc = board.getSquare(oldLoc,fvTot);
-
         piece.setLocation(newLoc);
+
+        System.out.println(toString() + " landed on " + piece.getLocation());
     }
 
-
+    public String toString(){
+        return "Player " + name;
+    }
 
 }
