@@ -46,13 +46,9 @@ class PlayerTest {
     void nullBoardShouldNotWork()
     {
         Board board = null;
-        Dice[] dices =
-                {
-                        new Dice(),
-                        new Dice()
-                };
+        Cup cup = new Cup(2);
         Player p = new Player("kevin");
-        assertThrows(InvalidParameterException.class,() -> { p.takeTurn(dices,board);} );
+        assertThrows(InvalidParameterException.class,() -> { p.takeTurn(cup,board);} );
     }
 
     @DisplayName("The dices to be rolled must not be null")
@@ -60,40 +56,24 @@ class PlayerTest {
     void nullDicesShouldNotWork()
     {
         Board board = new Board();
-        Dice[] dices = null;
+        Cup cup = null;
         Player p = new Player("kevin");
 
-        assertThrows(InvalidParameterException.class,() -> { p.takeTurn(dices,board);} );
+        assertThrows(InvalidParameterException.class,() -> { p.takeTurn(cup,board);} );
     }
 
-    @DisplayName("One Die should not be null")
-    @Test
-    void nullDiceShouldNotWork()
-    {
-        Board board = new Board();
-        Dice[] dices = {
-                null,
-                new Dice()
-        };
-        Player p = new Player("kevin");
-
-        assertThrows(InvalidParameterException.class,() -> { p.takeTurn(dices,board);} );
-    }
 
     @DisplayName("Player has moved from his initial Square")
     @Test
     void turnTaked()
     {
         Board board = new Board();
-        Dice[] dices = {
-                new Dice(),
-                new Dice()
-        };
+        Cup cup = new Cup(2);
         Player p = new Player("kevin");
 
-        Square oldLoc = p.piece.getLocation();
-        p.takeTurn(dices,board);
-        Square newLoc =  p.piece.getLocation();
+        Square oldLoc = p.getPiece().getLocation();
+        p.takeTurn(cup,board);
+        Square newLoc = p.getPiece().getLocation();
 
         assertNotEquals(oldLoc.getName(),newLoc.getName());
     }
