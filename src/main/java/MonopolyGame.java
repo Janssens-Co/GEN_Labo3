@@ -15,14 +15,14 @@ public class MonopolyGame {
     private int roundCnt;
     private final int N = 20;
     private Player[] players;
-    private Dice[] dices;
+    private Cup diceCup;
     private Board board;
     
     public MonopolyGame() {
         roundCnt = 0;
 
         players = new Player[]{new Player("Simon"),new Player("Bastien"),new Player("Emmanuel")};
-        dices = new Dice[]{new Dice(), new Dice()};
+        diceCup = new Cup(2);
         board = new Board();
     }
 
@@ -36,7 +36,7 @@ public class MonopolyGame {
     private void playRound(){
         System.out.println("===Round #" + (roundCnt + 1) + "===");
         for(Player p : players)
-            p.takeTurn(dices,board);
+            p.takeTurn(diceCup,board);
 
     }
 }

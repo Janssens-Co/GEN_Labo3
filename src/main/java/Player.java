@@ -13,16 +13,8 @@ import java.security.InvalidParameterException;
 
 public class Player {
 
-
-    Piece piece;
-
-    public String getName() {
-        return name;
-    }
-
-
+    private Piece piece;
     private String name;
-
 
     public Player(String name) {
 
@@ -32,42 +24,30 @@ public class Player {
         if(name == null || name =="")
             throw new InvalidParameterException("A player must have a name");
 
-        if(piece == null)
-            throw new InvalidParameterException("Piece must be present");
     }
 
 
 
-    public void takeTurn(Dice []dices, Board board)
+    public void takeTurn(Cup cup, Board board)
     {
 
         if(board == null)
             throw new InvalidParameterException("There is no board to play on");
-        if(dices == null)
+        if(cup == null)
             throw new InvalidParameterException("There are no dices");
 
-        int fv;
-        int fvTot = 0;
-
-        Square oldLoc;
-        Square newLoc;
-
-        oldLoc = piece.getLocation();
-        for(int i = 0; i < 2; i++)
-        {
-            if(dices[i]==null)
-                throw new InvalidParameterException("Dice " + i + " is null");
-
-            dices[i].roll();
-            fv = dices[i].getFaceValue();
-            fvTot += fv;
-        }
-
-        newLoc = board.getSquare(oldLoc,fvTot);
+        cup.roll();
+        Square newLoc = board.getSquare(piece.getLocation(),cup.getTotal());
         piece.setLocation(newLoc);
 
         System.out.println(toString() + " landed on " + piece.getLocation());
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public Piece getPiece() { return piece; }
 
     public String toString(){
         return "Player " + name;
