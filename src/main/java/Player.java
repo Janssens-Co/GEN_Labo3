@@ -2,21 +2,26 @@ import java.security.InvalidParameterException;
 
 public class Player {
 
+    private int cash;
+    private static final int INITIAL_CASH = 1500;
 
     Piece piece;
+
+    public int getNetWorth() {
+        return cash;
+    }
 
     public String getName() {
         return name;
     }
 
-
     private String name;
-
 
     public Player(String name, Piece piece) {
 
         this.name = name;
         this.piece = piece;
+        this.cash = INITIAL_CASH;
 
         if(name == null || name =="")
             throw new InvalidParameterException("A player must have a name");
@@ -24,7 +29,6 @@ public class Player {
         if(piece == null)
             throw new InvalidParameterException("Piece must be present");
     }
-
 
 
     public void takeTurn(Dice []dices, Board board)
