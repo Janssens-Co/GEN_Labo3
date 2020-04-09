@@ -1,4 +1,18 @@
-import org.junit.jupiter.api.*;
+/**
+ *  _____ _____ _   _       _      ___ ______ _____ _____
+ * |  __ |  ___| \ | |  _  | |    / _ \| ___ |  _  |____ |
+ * | |  \| |__ |  \| | (_) | |   / /_\ | |_/ | | | |   / /
+ * | | __|  __|| . ` |     | |   |  _  | ___ | | | |   \ \
+ * | |_\ | |___| |\  |  _  | |___| | | | |_/ \ \_/ .___/ /
+ *  \____\____/\_| \_/ (_) \_____\_| |_\____/ \___/\____/
+ *
+ * AUTHORS : Mattei Simon, Janssens Emmanuel, Potet Bastien
+ */
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.security.InvalidParameterException;
 import java.util.Random;
@@ -28,13 +42,14 @@ class PlayerTest {
     @Test
     void nullPlayerNameShouldNotWork()
     {
-        assertThrows(InvalidParameterException.class,() -> { Player p = new Player(null); });
+        assertThrows(InvalidParameterException.class,() -> { Player p = new Player(null);});
     }
 
     @DisplayName("The player's name cannot be empty")
     @Test
     void emptyPlayerNameShouldNotWork()
     {
+        assertThrows(InvalidParameterException.class,() -> { Player p = new Player("");});
         assertThrows(InvalidParameterException.class,() -> { Player p = new Player(""); });
     }
 
@@ -49,12 +64,9 @@ class PlayerTest {
     void nullBoardShouldNotWork()
     {
         Board board = null;
-        Dice[] dices =
-                {
-                        new Dice(),
-                        new Dice()
-                };
-        assertThrows(InvalidParameterException.class,() -> { player.takeTurn(dices,board);} );
+        Cup cup = new Cup(2);
+        Player p = new Player("kevin");
+        assertThrows(InvalidParameterException.class,() -> { p.takeTurn(cup,board);} );
     }
 
     @DisplayName("The dices to be rolled must not be null")
@@ -62,37 +74,24 @@ class PlayerTest {
     void nullDicesShouldNotWork()
     {
         Board board = new Board();
-        Dice[] dices = null;
+        Cup cup = null;
+        Player p = new Player("kevin");
 
-        assertThrows(InvalidParameterException.class,() -> { player.takeTurn(dices,board);} );
+        assertThrows(InvalidParameterException.class,() -> { p.takeTurn(cup,board);} );
     }
 
-    @DisplayName("One Die should not be null")
-    @Test
-    void nullDiceShouldNotWork()
-    {
-        Board board = new Board();
-        Dice[] dices = {
-                null,
-                new Dice()
-        };
-
-        assertThrows(InvalidParameterException.class,() -> { player.takeTurn(dices,board);} );
-    }
 
     @DisplayName("Player has moved from his initial Square")
     @Test
     void turnTaked()
     {
         Board board = new Board();
-        Dice[] dices = {
-                new Dice(),
-                new Dice()
-        };
+        Cup cup = new Cup(2);
+        Player p = new Player("kevin");
 
-        Square oldLoc = player.piece.getLocation();
-        player.takeTurn(dices,board);
-        Square newLoc =  player.piece.getLocation();
+        Square oldLoc = p.getPiece().getLocation();
+        p.takeTurn(cup,board);
+        Square newLoc = p.getPiece().getLocation();
 
         assertNotEquals(oldLoc.getName(),newLoc.getName());
     }
