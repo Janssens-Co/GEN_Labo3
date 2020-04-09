@@ -9,21 +9,31 @@
  * AUTHORS : Mattei Simon, Janssens Emmanuel, Potet Bastien
  */
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.security.InvalidParameterException;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest {
 
+    private Player player;
+    private String[] names = new String[]{"Kevin", "Henri", "Jean-Patrick"};
 
     @BeforeEach
     void initEach()
     {
-        System.out.println("Init test");
+        Random r = new Random();
+        player = new Player(names[r.nextInt(names.length)]);
+    }
+
+    @AfterEach
+    void afterEach(){
+        player = null;
     }
 
 
@@ -39,6 +49,12 @@ class PlayerTest {
     void emptyPlayerNameShouldNotWork()
     {
         assertThrows(InvalidParameterException.class,() -> { Player p = new Player("");});
+    }
+
+    @DisplayName("The initial cash is 1500")
+    @Test
+    void initialCashIs1500(){
+        assertEquals(player.getNetWorth(), 1500);
     }
 
     @DisplayName("The turn cannot be taken on a null board")

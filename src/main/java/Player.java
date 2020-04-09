@@ -13,6 +13,8 @@ import java.security.InvalidParameterException;
 
 public class Player {
 
+    private int cash;
+    private static final int INITIAL_CASH = 1500;
     private Piece piece;
     private String name;
 
@@ -20,12 +22,12 @@ public class Player {
 
         this.name = name;
         this.piece = new Piece(name + "'s piece");
+        this.cash = INITIAL_CASH;
 
         if(name == null || name =="")
             throw new InvalidParameterException("A player must have a name");
 
     }
-
 
 
     public void takeTurn(Cup cup, Board board)
@@ -45,6 +47,10 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public int getNetWorth(){
+        return cash;
     }
 
     public Piece getPiece() { return piece; }
