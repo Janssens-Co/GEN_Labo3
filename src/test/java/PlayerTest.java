@@ -15,7 +15,7 @@ class PlayerTest {
     void initEach()
     {
         Random r = new Random();
-        player = new Player(names[r.nextInt(names.length)], pieces[r.nextInt(pieces.length)]);
+        player = new Player(names[r.nextInt(names.length)]);
     }
 
     @AfterEach
@@ -28,27 +28,19 @@ class PlayerTest {
     @Test
     void nullPlayerNameShouldNotWork()
     {
-        assertThrows(InvalidParameterException.class,() -> { Player p = new Player(null,new Piece("cavalier"));});
+        assertThrows(InvalidParameterException.class,() -> { Player p = new Player(null); });
     }
 
     @DisplayName("The player's name cannot be empty")
     @Test
     void emptyPlayerNameShouldNotWork()
     {
-        assertThrows(InvalidParameterException.class,() -> { Player p = new Player("",new Piece("cavalier"));});
-    }
-
-    @DisplayName("The piece of a player cannot be null")
-    @Test
-    void nullPlayerPieceShouldNotWork()
-    {
-        assertThrows(InvalidParameterException.class,() -> { Player p = new Player("kevin'",null);});
+        assertThrows(InvalidParameterException.class,() -> { Player p = new Player(""); });
     }
 
     @DisplayName("The initial cash is 1500")
     @Test
     void initialCashIs1500(){
-        Player player = new Player("Henri", new Piece("Cavalier"));
         assertEquals(player.getNetWorth(), 1500);
     }
 
