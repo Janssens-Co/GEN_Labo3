@@ -14,6 +14,10 @@ public class Cup {
     private Dice[] dices;
 
     Cup(int numberOfDices){
+
+        if(numberOfDices <= 0)
+            throw new IllegalArgumentException("Number of dices in cup should be > 0");
+
         dices = new Dice[numberOfDices];
         for(int i = 0; i < dices.length; i++)
             dices[i] = new Dice();
