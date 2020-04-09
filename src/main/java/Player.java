@@ -30,7 +30,6 @@ public class Player {
     }
 
 
-
     public void takeTurn(Cup cup, Board board)
     {
 
@@ -48,6 +47,10 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public int getNetWorth(){
+        return cash;
     }
 
     public Piece getPiece() { return piece; }
