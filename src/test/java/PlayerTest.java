@@ -23,7 +23,6 @@ class PlayerTest {
 
     private Player player;
     private String[] names = new String[]{"Kevin", "Henri", "Jean-Patrick"};
-    private Piece[] pieces = new Piece[]{new Piece("Cavalier"), new Piece("Dame"), new Piece("Billet"), new Piece("Pion")};
 
     @BeforeEach
     void initEach()
@@ -50,7 +49,6 @@ class PlayerTest {
     void emptyPlayerNameShouldNotWork()
     {
         assertThrows(InvalidParameterException.class,() -> { Player p = new Player("");});
-        assertThrows(InvalidParameterException.class,() -> { Player p = new Player(""); });
     }
 
     @DisplayName("The initial cash is 1500")
