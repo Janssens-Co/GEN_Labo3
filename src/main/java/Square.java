@@ -11,24 +11,30 @@
 
 import java.security.InvalidParameterException;
 
-public class Square {
+public abstract class Square {
 
-    private String name;
+    String name = "square";
 
-    public String getName() {
-        return name;
-    }
-
-    public Square(String name) {
-
-        if(name == null || name.equals(""))
+    public Square(){}
+    public Square(String name)
+    {
+        if(name==null || name.equals(""))
         {
-            throw new InvalidParameterException("Square name should not be null");
+            throw new InvalidParameterException("Square name should not be empty");
         }
         this.name = name;
     }
+    public String getName()
+    {
+        return name;
+    }
 
-    public String toString(){
+    public void LandedOn(Player p)
+    {
+
+    }
+    public String toString()
+    {
         return name;
     }
 }

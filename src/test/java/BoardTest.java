@@ -17,22 +17,22 @@ public class BoardTest {
     @Test
     public void GetASquare(){
         Board board = new Board();
-        Square ret = board.getSquare(new Square("Square 1"), 3);
-        assertEquals(new Square("Square 4").getName(), ret.getName());
+        Square ret = board.getSquare(new RegularSquare(1), 3);
+        assertEquals(new RegularSquare(4).getName(), ret.getName());
     }
 
     @Test
     public void GetFromSquareGo(){
         Board board = new Board();
-        Square ret = board.getSquare(new Square("Go"), 3);
-        assertEquals(new Square("Square 3").getName(), ret.getName());
+        Square ret = board.getSquare(new GoSquare(), 3);
+        assertEquals(new RegularSquare(3).getName(), ret.getName());
     }
 
     @Test
     public void GetFromSquareExceed(){
         Board board = new Board();
-        Square ret = board.getSquare(new Square("Square 39"), 3);
-        assertEquals(new Square("Square 2").getName(), ret.getName());
+        Square ret = board.getSquare(new RegularSquare(39), 3);
+        assertEquals(new RegularSquare(2).getName(), ret.getName());
     }
 
     @Test
@@ -49,16 +49,16 @@ public class BoardTest {
         Board board = new Board();
 
         assertThrows(IllegalArgumentException.class, () -> {
-            Square ret = board.getSquare(new Square("Square 2"), -2);
+            Square ret = board.getSquare(new RegularSquare(2), -2);
         });
     }
 
-    @Test
+    /*@Test
     public void IllegalArgumentIfSquareIsNotValid(){
         Board board = new Board();
 
         assertThrows(IllegalArgumentException.class, () -> {
-            Square ret = board.getSquare(new Square("Square abc"), 4);
+            Square ret = board.getSquare(new RegularSquare("Square abc"), 4);
         });
-    }
+    }*/
 }

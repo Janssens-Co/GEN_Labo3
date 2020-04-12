@@ -21,7 +21,7 @@ public class Piece {
             throw new InvalidParameterException("Piece name should not be null");
 
         this.name = name;
-        location = new Square("Go");
+        location = new GoSquare();
     }
 
     public String getName() {
