@@ -1,7 +1,8 @@
 public class GoToJailSquare extends Square {
+
     GoToJailSquare( )
     {
-        super("Go to jail");
+        super("GoToJail");
     }
 
     @Override
