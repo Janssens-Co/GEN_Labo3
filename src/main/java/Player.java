@@ -29,7 +29,6 @@ public class Player {
 
     }
 
-
     public void takeTurn(Cup cup, Board board)
     {
 
@@ -51,6 +50,18 @@ public class Player {
 
     public int getNetWorth(){
         return cash;
+    }
+
+    public void addCash(int money){
+        if(money < 0)
+            throw new IllegalArgumentException("addCash => money : money < 0");
+        cash += money;
+    }
+
+    public void reduceCash(int money){
+        if(money < 0)
+            throw new IllegalArgumentException("reduceCash => money : money < 0");
+        cash -= money;
     }
 
     public Piece getPiece() { return piece; }

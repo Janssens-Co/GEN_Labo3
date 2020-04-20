@@ -1,6 +1,6 @@
 public class GoToJailSquare extends Square {
 
-    GoToJailSquare( )
+    public GoToJailSquare( )
     {
         super("GoToJail");
     }

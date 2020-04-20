@@ -29,10 +29,8 @@ public abstract class Square {
         return name;
     }
 
-    public void LandedOn(Player p)
-    {
+    public abstract void LandedOn(Player p);
 
-    }
     public String toString()
     {
         return name;

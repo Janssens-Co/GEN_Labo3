@@ -13,6 +13,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.security.InvalidParameterException;
 import java.util.Random;
@@ -49,6 +51,44 @@ class PlayerTest {
     void emptyPlayerNameShouldNotWork()
     {
         assertThrows(InvalidParameterException.class,() -> { Player p = new Player("");});
+    }
+
+    @DisplayName("Add some cash to initial cash")
+    @ParameterizedTest
+    @ValueSource(ints = {200,350,100,50,1,10, 0})
+    void addCashToPlayercash(int number)
+    {
+        int initialCash = player.getNetWorth();
+        player.addCash(number);
+        assertEquals(initialCash + number, player.getNetWorth());
+    }
+
+    @DisplayName("Reduce some cash to random cash")
+    @ParameterizedTest
+    @ValueSource(ints = {200,350,100,80,50,40, 0})
+    void reduceCashToPlayerCash(int number)
+    {
+        int initialCash = player.getNetWorth();
+        player.reduceCash(number);
+        assertEquals(initialCash - number, player.getNetWorth());
+    }
+
+    @DisplayName("Should throw if money < 0 when invocating the method addCash")
+    @Test
+    void shouldThrowInAddCashIfMoneyEquals0()
+    {
+        assertThrows(IllegalArgumentException.class, () -> {
+           player.addCash(-20);
+        });
+    }
+
+    @DisplayName("Should throw if money < 0 when invocating the method reduceCash")
+    @Test
+    void shouldThrowInReduceCashIfMoneyEquals0()
+    {
+        assertThrows(IllegalArgumentException.class, () -> {
+            player.reduceCash(-20);
+        });
     }
 
     @DisplayName("The initial cash is 1500")

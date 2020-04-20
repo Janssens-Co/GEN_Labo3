@@ -4,4 +4,9 @@ public class JailSquare extends Square{
         super("Jail");
     }
 
+    @Override
+    public void LandedOn(Player p) {
+
+    }
+
 }

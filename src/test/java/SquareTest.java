@@ -9,6 +9,7 @@
  * AUTHORS : Mattei Simon, Janssens Emmanuel, Potet Bastien
  */
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
@@ -42,14 +43,35 @@ class SquareTest {
         assertTrue(s.getName().equals(String.format("Regular %d",repeat)));
         repeat++;
     }
-    /*@Test
-    void nullConstructorShouldNotWork()
-    {
-        assertThrows(InvalidParameterException.class, () -> {new GoSquare(null);});
-    }
+
+    @DisplayName("When landed on IncomeTax Square -> reduceCash of 10% of cash")
     @Test
-    void emptyConstructorShouldNotWork()
+    void shouldReduce10Percent()
     {
-        assertThrows(InvalidParameterException.class, () -> {new Square("");});
-    }*/
+        Player player = new Player("Bastien");
+        IncomeTaxSquare taxSquare = new IncomeTaxSquare();
+        taxSquare.LandedOn(player);
+        assertEquals(player.getNetWorth(), 1500 - (10 / 100.0 * 1500));
+    }
+
+    @DisplayName("When landed on IncomeTax Square -> reduceCash of 200")
+    @Test
+    void shouldReduce200()
+    {
+        Player player = new Player("Bastien");
+        IncomeTaxSquare taxSquare = new IncomeTaxSquare();
+        player.addCash(8000);
+        taxSquare.LandedOn(player);
+        assertEquals(player.getNetWorth(), 9500 - 200);
+    }
+
+    @DisplayName("When landed on Go to jail square -> player should be on Jail square")
+    @Test
+    void playerShouldBeOnJailSquare()
+    {
+        Player player = new Player("Bastien");
+        GoToJailSquare goToJailSquare = new GoToJailSquare();
+        goToJailSquare.LandedOn(player);
+        assertEquals(player.getPiece().getLocation(), new JailSquare());
+    }
 }
