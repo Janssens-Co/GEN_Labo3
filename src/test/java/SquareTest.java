@@ -9,14 +9,27 @@
  * AUTHORS : Mattei Simon, Janssens Emmanuel, Potet Bastien
  */
 
-import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.security.InvalidParameterException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class SquareTest {
+
+    private Player player;
+
+    @BeforeEach
+    void initEach(){
+        Board board = new Board();
+        Cup cup = new Cup(2);
+        player = new Player("Bastien", board, cup);
+    }
+
+    @AfterEach
+    void afterEach(){
+        player = null;
+    }
 
     @Test
     void testNameEquals()
@@ -42,14 +55,41 @@ class SquareTest {
         assertTrue(s.getName().equals(String.format("Regular %d",repeat)));
         repeat++;
     }
-    /*@Test
-    void nullConstructorShouldNotWork()
-    {
-        assertThrows(InvalidParameterException.class, () -> {new GoSquare(null);});
-    }
+
+    @DisplayName("When landed on IncomeTax Square -> reduceCash of 10% of cash")
     @Test
-    void emptyConstructorShouldNotWork()
+    void shouldReduce10Percent()
     {
-        assertThrows(InvalidParameterException.class, () -> {new Square("");});
-    }*/
+        IncomeTaxSquare taxSquare = new IncomeTaxSquare();
+        taxSquare.LandedOn(player);
+        assertEquals(player.getNetWorth(), 1500 - (10 / 100.0 * 1500));
+    }
+
+    @DisplayName("When landed on IncomeTax Square -> reduceCash of 200")
+    @Test
+    void shouldReduce200()
+    {
+        IncomeTaxSquare taxSquare = new IncomeTaxSquare();
+        player.addCash(8000);
+        taxSquare.LandedOn(player);
+        assertEquals(player.getNetWorth(), 9500 - 200);
+    }
+
+    @DisplayName("When landed on Go to jail square -> player should be on Jail square")
+    @Test
+    void playerShouldBeOnJailSquare()
+    {
+        GoToJailSquare goToJailSquare = new GoToJailSquare();
+        goToJailSquare.LandedOn(player);
+        assertEquals(player.getPiece().getLocation(), player.getBoard().getJailSquare());
+    }
+
+    @DisplayName("When landed on Go Square -> addCash of 200")
+    @Test
+    void shouldAdd200()
+    {
+        GoSquare goSquare = new GoSquare();
+        goSquare.LandedOn(player);
+        assertEquals(player.getNetWorth(), 1700);
+    }
 }

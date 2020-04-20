@@ -1,8 +1,12 @@
+import static java.lang.Math.min;
+
 public class IncomeTaxSquare extends Square {
+
+    public static final String NAME_OF_INCOMETAXSQUARE = "IncomeTax";
 
     IncomeTaxSquare( )
     {
-        super("IncomeTax");
+        super(NAME_OF_INCOMETAXSQUARE);
     }
 
 
@@ -10,6 +14,6 @@ public class IncomeTaxSquare extends Square {
     public void LandedOn(Player p)
     {
         int w  = p.getNetWorth();
-        //p.reduceCash(min(200,w*10/100));
+        p.reduceCash((int) min(200.0,w * 10.0 / 100.0));
     }
 }
