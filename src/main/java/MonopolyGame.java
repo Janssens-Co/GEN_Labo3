@@ -21,9 +21,9 @@ public class MonopolyGame {
     public MonopolyGame() {
         roundCnt = 0;
 
-        players = new Player[]{new Player("Simon"),new Player("Bastien"),new Player("Emmanuel")};
         diceCup = new Cup(2);
         board = new Board();
+        players = new Player[]{new Player("Simon", board, diceCup),new Player("Bastien", board, diceCup),new Player("Emmanuel", board, diceCup)};
     }
 
     public void playGame() {
@@ -36,7 +36,7 @@ public class MonopolyGame {
     private void playRound(){
         System.out.println("===Round #" + (roundCnt + 1) + "===");
         for(Player p : players)
-            p.takeTurn(diceCup,board);
+            p.takeTurn();
 
     }
 }

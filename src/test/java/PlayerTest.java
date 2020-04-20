@@ -30,7 +30,7 @@ class PlayerTest {
     void initEach()
     {
         Random r = new Random();
-        player = new Player(names[r.nextInt(names.length)]);
+        player = new Player(names[r.nextInt(names.length)], new Board(), new Cup(2));
     }
 
     @AfterEach
@@ -43,14 +43,14 @@ class PlayerTest {
     @Test
     void nullPlayerNameShouldNotWork()
     {
-        assertThrows(InvalidParameterException.class,() -> { Player p = new Player(null);});
+        assertThrows(InvalidParameterException.class,() -> { Player p = new Player(null, new Board(), new Cup(2));});
     }
 
     @DisplayName("The player's name cannot be empty")
     @Test
     void emptyPlayerNameShouldNotWork()
     {
-        assertThrows(InvalidParameterException.class,() -> { Player p = new Player("");});
+        assertThrows(InvalidParameterException.class,() -> { Player p = new Player("", new Board(), new Cup(2));});
     }
 
     @DisplayName("Add some cash to initial cash")
@@ -97,27 +97,6 @@ class PlayerTest {
         assertEquals(player.getNetWorth(), 1500);
     }
 
-    @DisplayName("The turn cannot be taken on a null board")
-    @Test
-    void nullBoardShouldNotWork()
-    {
-        Board board = null;
-        Cup cup = new Cup(2);
-        Player p = new Player("kevin");
-        assertThrows(InvalidParameterException.class,() -> { p.takeTurn(cup,board);} );
-    }
-
-    @DisplayName("The dices to be rolled must not be null")
-    @Test
-    void nullDicesShouldNotWork()
-    {
-        Board board = new Board();
-        Cup cup = null;
-        Player p = new Player("kevin");
-
-        assertThrows(InvalidParameterException.class,() -> { p.takeTurn(cup,board);} );
-    }
-
 
     @DisplayName("Player has moved from his initial Square")
     @Test
@@ -125,10 +104,10 @@ class PlayerTest {
     {
         Board board = new Board();
         Cup cup = new Cup(2);
-        Player p = new Player("kevin");
+        Player p = new Player("kevin", board, cup);
 
         Square oldLoc = p.getPiece().getLocation();
-        p.takeTurn(cup,board);
+        p.takeTurn();
         Square newLoc = p.getPiece().getLocation();
 
         assertNotEquals(oldLoc.getName(),newLoc.getName());

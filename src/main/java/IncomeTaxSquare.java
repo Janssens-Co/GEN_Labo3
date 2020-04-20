@@ -2,9 +2,11 @@ import static java.lang.Math.min;
 
 public class IncomeTaxSquare extends Square {
 
+    public static final String NAME_OF_INCOMETAXSQUARE = "IncomeTax";
+
     IncomeTaxSquare( )
     {
-        super("IncomeTax");
+        super(NAME_OF_INCOMETAXSQUARE);
     }
 
 

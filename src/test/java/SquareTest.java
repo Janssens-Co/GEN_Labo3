@@ -9,15 +9,27 @@
  * AUTHORS : Mattei Simon, Janssens Emmanuel, Potet Bastien
  */
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.security.InvalidParameterException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class SquareTest {
+
+    private Player player;
+
+    @BeforeEach
+    void initEach(){
+        Board board = new Board();
+        Cup cup = new Cup(2);
+        player = new Player("Bastien", board, cup);
+    }
+
+    @AfterEach
+    void afterEach(){
+        player = null;
+    }
 
     @Test
     void testNameEquals()
@@ -48,7 +60,6 @@ class SquareTest {
     @Test
     void shouldReduce10Percent()
     {
-        Player player = new Player("Bastien");
         IncomeTaxSquare taxSquare = new IncomeTaxSquare();
         taxSquare.LandedOn(player);
         assertEquals(player.getNetWorth(), 1500 - (10 / 100.0 * 1500));
@@ -58,7 +69,6 @@ class SquareTest {
     @Test
     void shouldReduce200()
     {
-        Player player = new Player("Bastien");
         IncomeTaxSquare taxSquare = new IncomeTaxSquare();
         player.addCash(8000);
         taxSquare.LandedOn(player);
@@ -69,9 +79,17 @@ class SquareTest {
     @Test
     void playerShouldBeOnJailSquare()
     {
-        Player player = new Player("Bastien");
         GoToJailSquare goToJailSquare = new GoToJailSquare();
         goToJailSquare.LandedOn(player);
-        assertEquals(player.getPiece().getLocation(), new JailSquare());
+        assertEquals(player.getPiece().getLocation(), player.getBoard().getJailSquare());
+    }
+
+    @DisplayName("When landed on Go Square -> addCash of 200")
+    @Test
+    void shouldAdd200()
+    {
+        GoSquare goSquare = new GoSquare();
+        goSquare.LandedOn(player);
+        assertEquals(player.getNetWorth(), 1700);
     }
 }

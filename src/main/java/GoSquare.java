@@ -1,8 +1,10 @@
 public class GoSquare extends Square {
 
+    public static final String NAME_OF_GO = "Go";
+
     GoSquare()
     {
-        super("Go");
+        super(NAME_OF_GO);
     }
 
     @Override
