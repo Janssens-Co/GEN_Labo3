@@ -33,8 +33,8 @@ class PieceTest {
     @Test
     void newLocationShouldBeCorrect() {
         Piece p = new Piece("Go");
-        p.setLocation(new Square("Square 1"));
-        assertEquals("Square 1",p.getLocation().getName());
+        p.setLocation(new RegularSquare(1));
+        assertEquals("Regular 1",p.getLocation().getName());
     }
 
     @Test

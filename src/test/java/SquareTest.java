@@ -9,6 +9,7 @@
  * AUTHORS : Mattei Simon, Janssens Emmanuel, Potet Bastien
  */
 
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.security.InvalidParameterException;
@@ -20,19 +21,35 @@ class SquareTest {
     @Test
     void testNameEquals()
     {
-        Square s = new Square("prison");
+        Square s = new GoSquare();
+        assertTrue(s.getName().equals("Go"));
 
-        assertTrue(s.getName().equals("prison"));
+        Square s2 = new GoToJailSquare();
+        assertTrue(s2.getName().equals("GoToJail"));
+
+        Square s3 =  new IncomeTaxSquare();
+        assertTrue((s3.getName().equals("IncomeTax")));
+
+        Square s4 = new RegularSquare(2);
+        assertTrue(s4.getName().equals("Regular 2"));
     }
 
-    @Test
+    static int repeat = 1;
+    @RepeatedTest(40)
+    void testSquareCreate()
+    {
+        Square s = new RegularSquare(repeat);
+        assertTrue(s.getName().equals(String.format("Regular %d",repeat)));
+        repeat++;
+    }
+    /*@Test
     void nullConstructorShouldNotWork()
     {
-        assertThrows(InvalidParameterException.class, () -> {new Square(null);});
+        assertThrows(InvalidParameterException.class, () -> {new GoSquare(null);});
     }
     @Test
     void emptyConstructorShouldNotWork()
     {
         assertThrows(InvalidParameterException.class, () -> {new Square("");});
-    }
+    }*/
 }
