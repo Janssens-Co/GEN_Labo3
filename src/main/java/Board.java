@@ -14,7 +14,6 @@ public class Board {
     private static final int SIZE_BOARD = 40;
     private static final String NAME_OF_START_SQUARE = "Go";
     private Square[] board;
-    private final JailSquare jail = new JailSquare();
 
     public Board(){
         board = new Square[SIZE_BOARD];
@@ -24,10 +23,6 @@ public class Board {
         for(int i = 1; i < SIZE_BOARD; ++i){
             board[i] = new RegularSquare(i);
         }
-    }
-
-    public JailSquare getJail(){
-        return jail;
     }
 
 
