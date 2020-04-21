@@ -44,21 +44,5 @@ public class BoardTest {
         });
     }
 
-    @Test
-    public void IllegalArgumentIfFvTotIsLessZero(){
-        Board board = new Board();
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            Square ret = board.getSquare(new RegularSquare(2), -2);
-        });
-    }
-
-    /*@Test
-    public void IllegalArgumentIfSquareIsNotValid(){
-        Board board = new Board();
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            Square ret = board.getSquare(new RegularSquare("Square abc"), 4);
-        });
-    }*/
 }

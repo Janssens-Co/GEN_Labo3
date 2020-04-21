@@ -35,16 +35,16 @@ class SquareTest {
     void testNameEquals()
     {
         Square s = new GoSquare();
-        assertTrue(s.getName().equals("Go"));
-
         Square s2 = new GoToJailSquare();
-        assertTrue(s2.getName().equals("GoToJail"));
-
         Square s3 =  new IncomeTaxSquare();
-        assertTrue((s3.getName().equals("IncomeTax")));
-
         Square s4 = new RegularSquare(2);
-        assertTrue(s4.getName().equals("Regular 2"));
+
+        assertAll(
+                () -> assertEquals("Go", s.getName()),
+                () -> assertEquals("GoToJail", s2.getName()),
+                () -> assertEquals("IncomeTax", s3.getName()),
+                () -> assertEquals("Regular 2", s4.getName())
+        );
     }
 
     static int repeat = 1;
@@ -52,7 +52,7 @@ class SquareTest {
     void testSquareCreate()
     {
         Square s = new RegularSquare(repeat);
-        assertTrue(s.getName().equals(String.format("Regular %d",repeat)));
+        assertEquals(s.getName(), String.format("Regular %d", repeat));
         repeat++;
     }
 
